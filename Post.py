@@ -29,9 +29,9 @@ class Pos(db.Model):
     def _repr_(self):
         return '<Pos %r>' % self.key
 def render_with_context(template, url='/post_location', **kw):
-    with Get.test_request_context(url):
+    with Post.test_request_context(url):
         return render_template(template, **kw)
-@Get.route('/')
+@Post.route('/')
 def loc():
      # for seeing database
     locquery=Pos.query.all()
@@ -39,7 +39,7 @@ def loc():
     singlequery=Pos.query.filter_by(key="IN/110073").first()
     a=render_with_context('add_pin.html',singlequery=singlequery)
     return a
-@Get.route('/post_location',methods=['POST'])
+@Post.route('/post_location',methods=['POST'])
 def post_location():
     # print(request.form)
     with Post.app_context():
