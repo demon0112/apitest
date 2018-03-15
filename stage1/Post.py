@@ -32,7 +32,7 @@ def render_with_context(template, url='/post_location', **kw):
     with Get.test_request_context(url):
     return render_template(template, **kw)
 # for Querying database
-@Get.route('/')
+@Post.route('/')
 def loc():
      # for seeing database
     locquery=Pos.query.all()
@@ -41,7 +41,7 @@ def loc():
     a=render_with_context('add_pin.html',singlequery=singlequery)
     return a
 #for adding database
-@Get.route('/post_location',methods=['POST'])
+@Post.route('/post_location',methods=['POST'])
 def post_location():
     # print(request.form)
     with Post.app_context():
